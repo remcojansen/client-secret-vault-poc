@@ -1,0 +1,28 @@
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: vault-poc-keycloak
+    command:
+      - start-dev
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_HTTPS_ENABLED: "true"
+      KC_HTTPS_CERTIFICATE_FILE: /etc/keycloak/certs/server.crt
+      KC_HTTPS_CERTIFICATE_KEY_FILE: /etc/keycloak/certs/server.key
+      KC_HOSTNAME_STRICT: "false"
+    ports:
+      - "9443:8443"
+    volumes:
+      - ./certs:/etc/keycloak/certs:ro
+
+  vault:
+    image: hashicorp/vault:latest
+    container_name: vault-poc-vault
+    cap_add:
+      - IPC_LOCK
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: root
+      VAULT_DEV_LISTEN_ADDRESS: 0.0.0.0:8200
+    ports:
+      - "9200:8200"

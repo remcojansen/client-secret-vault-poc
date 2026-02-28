@@ -1,0 +1,18 @@
+client:
+    client_id: client3
+    client_name: Public client 3
+    description: Public client for browser-based flows
+    redirect_uris:
+        - http://localhost:9555/callback
+    response_types:
+        - code
+    grant_types:
+        - authorization_code
+    token_endpoint_auth_method: none
+    scope: openid,profile,email
+    enabled: true
+    client_type: public
+    pkce_required: true
+    prompt_scope_approval: true
+    access_token_format: jwt
+    access_token_lifetime: 300

@@ -1,0 +1,19 @@
+client:
+    client_id: client1
+    client_name: Test client
+    description: This is a test client
+    redirect_uris:
+        - http://localhost:9555/callback
+    response_types:
+        - code
+    grant_types:
+        - authorization_code
+        - client_credentials
+    token_endpoint_auth_method: client_secret_basic
+    scope: openid,profile,email
+    enabled: true
+    client_type: confidential
+    pkce_required: true
+    prompt_scope_approval: true
+    access_token_format: jwt
+    access_token_lifetime: 300
