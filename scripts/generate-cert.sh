@@ -14,4 +14,8 @@ openssl req -x509 -newkey rsa:2048 -keyout "$CERT_DIR/server.key" -out "$CERT_DI
   -days 365 -nodes \
   -subj "/CN=localhost/O=Vault POC/C=US"
 
+# Make certs group readable to allow reading inside a container when running as non-root
+chmod 755 "$CERT_DIR"
+chmod 644 "$CERT_DIR/server.key" "$CERT_DIR/server.crt"
+
 echo "✓ Self-signed certificate generated at $CERT_DIR/"

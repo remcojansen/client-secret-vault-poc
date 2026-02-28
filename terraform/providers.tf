@@ -14,11 +14,11 @@ terraform {
 }
 
 provider "keycloak" {
-  client_id              = "admin-cli"
-  url                    = var.keycloak_url
-  username               = var.keycloak_admin_user
-  password               = var.keycloak_admin_password
-  realm                  = "master"
+  client_id                = "admin-cli"
+  url                      = var.keycloak_url
+  username                 = var.keycloak_admin_user
+  password                 = var.keycloak_admin_password
+  realm                    = "master"
   tls_insecure_skip_verify = true
 }
 
