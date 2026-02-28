@@ -1,5 +1,7 @@
 .SILENT:
 
+IAC_CMD := $(shell if command -v tofu >/dev/null 2>&1; then echo tofu; elif command -v terraform >/dev/null 2>&1; then echo terraform; fi)
+
 .PHONY: up
 up:
 	bash ./scripts/generate-cert.sh
@@ -10,7 +12,8 @@ up:
 
 .PHONY: config
 config:
-	cd terraform && terraform init && terraform apply
+	if [ -z "$(IAC_CMD)" ]; then echo "Error: install OpenTofu (tofu) or Terraform (terraform)."; exit 1; fi
+	cd terraform && $(IAC_CMD) init && $(IAC_CMD) apply
 
 .PHONY: down
 down:
@@ -27,6 +30,6 @@ clean:
 help:
 	echo "Available targets:"
 	echo "  make up      - Start containers and seed Vault"
-	echo "  make config  - Apply Terraform configuration"
+	echo "  make config  - Apply OpenTofu/Terraform configuration (prefers tofu)"
 	echo "  make down    - Stop and remove containers"
-	echo "  make clean   - Remove compose containers and terraform local state/artifacts"
+	echo "  make clean   - Remove compose containers and IaC local state/artifacts"

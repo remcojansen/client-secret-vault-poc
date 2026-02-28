@@ -1,0 +1,19 @@
+# Copy this file to terraform.tfvars and fill in local values.
+
+keycloak_url            = "https://localhost:9443"
+keycloak_admin_user     = "admin"
+keycloak_admin_password = "REPLACE_ME"
+
+realm             = "poc"
+client_config_dir = "../config"
+
+vault_addr  = "http://localhost:9200"
+vault_token = "REPLACE_ME"
+
+vault_kv_mount = "secret"
+
+# Optional overrides per client:
+# vault_client_secret_paths = {
+#   client1 = "keycloak/client1"
+#   client2 = "keycloak/client2"
+# }

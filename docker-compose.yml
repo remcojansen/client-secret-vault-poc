@@ -17,7 +17,7 @@ services:
       - ./certs:/etc/keycloak/certs:ro
 
   vault:
-    image: hashicorp/vault:latest
+    image: docker.io/hashicorp/vault:latest
     container_name: vault-poc-vault
     cap_add:
       - IPC_LOCK

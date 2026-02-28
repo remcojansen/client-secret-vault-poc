@@ -4,8 +4,8 @@ This POC shows how to combine the Keycloak and Vault Terraform providers to prov
 
 ## Prerequisites
 
-- Docker and Docker Compose
-- Terraform 1.5+
+- Podman with Podman Compose or Docker with Docker Compose
+- OpenTofu or Terraform 1.5+
 - Vault CLI (for ./scripts/vault-init.sh)
 
 ## Local setup
@@ -16,13 +16,20 @@ This POC shows how to combine the Keycloak and Vault Terraform providers to prov
    make up
    ```
 
-2. Apply Terraform to provision the Keycloak clients:
+2. Create local Terraform variables from the template and set secrets:
+
+   ```sh
+   cp terraform/terraform.tfvars.example terraform/terraform.tfvars
+   # edit terraform/terraform.tfvars and replace REPLACE_ME values
+   ```
+
+3. Apply Terraform/OpenTofu to provision the Keycloak clients:
 
    ```sh
    make config
    ```
 
-3. To stop and clean up:
+4. To stop and clean up:
 
    ```sh
    make down      # Stop containers
@@ -32,9 +39,9 @@ This POC shows how to combine the Keycloak and Vault Terraform providers to prov
 ## Available Make targets
 
 - `make up` — Generate HTTPS certs, start Keycloak and Vault, wait for readiness, seed Vault with secrets
-- `make config` — Initialize and apply Terraform configuration
+- `make config` — Initialize and apply OpenTofu/Terraform configuration (prefers OpenTofu if installed)
 - `make down` — Stop and remove containers
-- `make clean` — Full cleanup (containers, volumes, Terraform state, certs)
+- `make clean` — Full cleanup (containers, volumes, OpenTofu/Terraform state, certs)
 
 ## Configuration
 
